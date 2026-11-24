@@ -126,3 +126,25 @@ class IncomingEmail(DomainModel):
     to_address: str
     subject: str
     body: str
+
+
+class ResponseClassification(DomainModel):
+    provider_message_id: str
+    thread_id: str | None = None
+    from_address: str
+    classification: str
+    summary: str
+    customer_intent: str
+    recommended_action: str
+    priority: str = Field(pattern="^(low|medium|high|urgent)$")
+    human_review_required: bool = True
+    unsubscribed: bool = False
+
+
+class FollowUpCreate(DomainModel):
+    lead_id: UUID
+    title: str = Field(min_length=1, max_length=200)
+    description: str | None = None
+    priority: str = Field(default="medium", pattern="^(low|medium|high|urgent)$")
+    due_at: datetime
+    owner_id: UUID | None = None

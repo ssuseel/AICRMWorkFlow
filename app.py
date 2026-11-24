@@ -8,6 +8,7 @@ from src.db.session import engine
 from src.logging_config import configure_logging
 from src.ui.dashboard import render
 from src.ui.emails import render as render_emails
+from src.ui.followups import render as render_followups
 from src.ui.leads import render as render_leads
 
 configure_logging()
@@ -33,6 +34,10 @@ def emails_page() -> None:
     render_emails(str(settings.default_tenant_id))
 
 
+def response_followup_page() -> None:
+    render_followups(str(settings.default_tenant_id))
+
+
 pages = {
     "Workspace": [
         st.Page(
@@ -55,6 +60,12 @@ pages = {
             title="Email Outreach",
             icon=":material/mail:",
             url_path="emails",
+        ),
+        st.Page(
+            response_followup_page,
+            title="Responses & Follow-ups",
+            icon=":material/task:",
+            url_path="responses-followups",
         ),
     ],
 }

@@ -2,6 +2,10 @@
 
 Phase 5 coverage includes Gmail send mapping, incoming message decoding, thread retrieval, provider selection, and missing Gmail credential rejection.
 
+Phase 6 coverage includes response classification, response deduplication, lead engagement, and unsubscribe follow-up cancellation.
+
+Phase 7 coverage includes business-day calculations, scheduling, rescheduling, completion, cancellation, overdue transitions, and persistent worker execution.
+
 Phase 4 coverage includes draft creation and preview, draft edits, approval snapshots, approval enforcement, mock delivery, and idempotency-key persistence.
 
 Phase 2 coverage includes lead duplicate handling, lead updates and assignment, CSV imports, soft deletion safeguards, repository filtering, and tenant isolation.

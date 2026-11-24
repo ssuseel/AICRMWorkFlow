@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phase 5 Gmail integration is implemented with mock fallback.
+Phases 6 and 7 implement response intelligence and persistent follow-up management.
 
 Architecture documents:
 

@@ -84,6 +84,8 @@ Exit criteria: mock mode works; real adapters are inactive unless configured; fa
 
 ## Phase 6 - Response Intelligence
 
+Status: complete for manual/persistent classification; no automatic replies.
+
 - Add incoming response ingestion
 - Implement Pydantic response classifier
 - Store summaries and classification metadata
@@ -93,6 +95,8 @@ Exit criteria: mock mode works; real adapters are inactive unless configured; fa
 Exit criteria: classifications are persisted and cancellation behavior is deterministic; no automatic send.
 
 ## Phase 7 - Follow-up Management
+
+Status: complete for persistent scheduling and worker entry point.
 
 - Implement follow-up model/service
 - Add configurable business rules
