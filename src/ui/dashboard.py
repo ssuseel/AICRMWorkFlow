@@ -11,7 +11,7 @@ def render(tenant_id: str) -> None:
     apply_styles()
     st.title("Customer Workflow Dashboard")
     st.markdown(
-        '<div class="phase-banner">Demo workspace · Phase 1 foundation</div>',
+        '<div class="phase-banner">Live workflow metrics · Tenant-scoped data</div>',
         unsafe_allow_html=True,
     )
     st.write("")
@@ -32,6 +32,10 @@ def render(tenant_id: str) -> None:
     ]
     for row_start in range(0, len(cards), 3):
         columns = st.columns(3)
-        for column, (label, key) in zip(columns, cards[row_start : row_start + 3]):
+        for column, (label, key) in zip(
+            columns,
+            cards[row_start : row_start + 3],
+            strict=False,
+        ):
             with column:
                 st.metric(label, metrics[key])

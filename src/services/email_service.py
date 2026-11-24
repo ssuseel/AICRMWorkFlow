@@ -84,7 +84,8 @@ class EmailService:
             f"Hi {lead.first_name},\n\n"
             f"I saw your team at {lead.company or 'your organization'} may be "
             "interested in improving customer workflows. I would welcome a brief "
-            "conversation to understand your priorities and identify a practical next step.\n\n"
+            "conversation to understand your priorities and identify a practical "
+            "next step.\n\n"
             "Would you be open to a 20-minute discovery call?\n\n"
             "Best regards"
         )

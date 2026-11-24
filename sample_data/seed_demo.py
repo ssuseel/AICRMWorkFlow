@@ -29,7 +29,7 @@ def seed(database_url: str | None = None) -> dict[str, int]:
             session.add(tenant)
 
         owners = {}
-        for index, (name, email) in enumerate(
+        for _index, (name, email) in enumerate(
             [
                 ("Jordan Lee", "jordan@demo-company.example"),
                 ("Morgan Chen", "morgan@demo-company.example"),

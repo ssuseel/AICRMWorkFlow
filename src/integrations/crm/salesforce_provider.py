@@ -172,7 +172,8 @@ class SalesforceProvider(CRMProvider):
         }
         if not fields.get("LastName") or not fields.get("Company"):
             raise CRMPermanentError(
-                "Salesforce Lead requires last name and company; provide field values before sync"
+                "Salesforce Lead requires last name and company; "
+                "provide field values before sync"
             )
         email = str(lead.get("email") or "")
         if not email:

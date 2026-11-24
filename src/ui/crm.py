@@ -18,7 +18,8 @@ def render(tenant_id: str) -> None:
     st.caption(f"Configured provider: {provider_name}")
     if provider_name == "mock":
         st.info(
-            "Mock CRM mode: records remain in this app process and are not sent externally."
+            "Mock CRM mode: records remain in this app process and are not "
+            "sent externally."
         )
     elif provider_name == "salesforce":
         st.warning("Salesforce synchronization changes external Salesforce records.")
@@ -43,7 +44,8 @@ def render(tenant_id: str) -> None:
                 record = service.sync_lead(lead_options[selected])
                 if record.status == "SYNCED":
                     st.success(
-                        f"Synchronized with {record.provider}; external ID: {record.external_id}"
+                        f"Synchronized with {record.provider}; external ID: "
+                        f"{record.external_id}"
                     )
                 else:
                     st.error(
@@ -63,7 +65,8 @@ def render(tenant_id: str) -> None:
                     lead_options[selected]
                 )
                 st.success(
-                    f"Contact {contact.external_id} associated with account {account.external_id}."
+                    f"Contact {contact.external_id} associated with account "
+                    f"{account.external_id}."
                 )
             except (CRMProviderError, ValueError, LookupError) as exc:
                 st.error(f"Unable to synchronize contact and account: {exc}")
@@ -116,7 +119,8 @@ def render(tenant_id: str) -> None:
 
         st.subheader("Field mapping")
         st.caption(
-            "Salesforce defaults use standard Lead fields; custom mapping overrides are tenant-scoped."
+            "Salesforce defaults use standard Lead fields; custom mapping "
+            "overrides are tenant-scoped."
         )
         local_field = st.selectbox(
             "Local lead field",

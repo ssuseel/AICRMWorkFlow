@@ -99,7 +99,8 @@ class LeadService:
         )
         if protected_email:
             raise LeadDeleteRestrictedError(
-                "Lead cannot be deleted while an email is approved, pending approval, or sent"
+                "Lead cannot be deleted while an email is approved, pending "
+                "approval, or sent"
             )
         active_follow_up = (
             self.session.query(FollowUp)

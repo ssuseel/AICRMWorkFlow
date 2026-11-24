@@ -121,6 +121,8 @@ Exit criteria: mock synchronization works; real adapters only operate with valid
 
 ## Phase 9 - Analytics
 
+Status: complete.
+
 - Implement aggregation services
 - Build acquisition, qualification, email, follow-up, pipeline and CRM health views
 - Add global filters
@@ -129,6 +131,8 @@ Exit criteria: mock synchronization works; real adapters only operate with valid
 Exit criteria: analytics are database-driven and match test fixtures.
 
 ## Phase 10 - Quality and Testing
+
+Status: complete for current application modules and CI gates.
 
 - Run unit, integration and UI smoke tests
 - Add GitHub Actions for lint/type/test

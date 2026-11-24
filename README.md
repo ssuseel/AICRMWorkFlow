@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phase 8 adds mock CRM synchronization and a Salesforce REST adapter.
+Phases 9 and 10 add tenant-filtered analytics, metric regression tests, and CI quality gates.
 
 Architecture documents:
 
@@ -14,6 +14,7 @@ Architecture documents:
 - [Workflow states](docs/WORKFLOW_STATES.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Testing strategy](docs/TESTING_STRATEGY.md)
+- [Analytics definitions](docs/ANALYTICS.md)
 
 ## Local setup
 

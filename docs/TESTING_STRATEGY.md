@@ -8,6 +8,10 @@ Phase 7 coverage includes business-day calculations, scheduling, rescheduling, c
 
 Phase 8 coverage includes tenant-scoped mock synchronization, idempotency, audit events, transient retry scheduling, permanent failures, field mapping, Salesforce OAuth configuration, lead create/update-by-email, and task idempotency. Provider tests use fake HTTP responses and do not call Salesforce.
 
+Phase 9 coverage validates date, owner, industry and source filtering; database-backed lead acquisition, qualification, conversion, email, follow-up, pipeline, CRM health and team metrics; empty data; and tenant isolation.
+
+Phase 10 CI gates run Ruff lint and format checks, the complete pytest suite, and an Alembic upgrade/downgrade migration check.
+
 Phase 4 coverage includes draft creation and preview, draft edits, approval snapshots, approval enforcement, mock delivery, and idempotency-key persistence.
 
 Phase 2 coverage includes lead duplicate handling, lead updates and assignment, CSV imports, soft deletion safeguards, repository filtering, and tenant isolation.

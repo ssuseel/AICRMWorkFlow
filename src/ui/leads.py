@@ -192,7 +192,8 @@ def render(tenant_id: str) -> None:
                             tenant_id,
                         ).qualify(selected.id)
                         st.success(
-                            f"Qualification complete: score {result.score}, status {result.status}"
+                            f"Qualification complete: score {result.score}, "
+                            f"status {result.status}"
                         )
                         st.write(result.evidence.summary)
                         evidence = result.evidence

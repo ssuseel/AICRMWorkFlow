@@ -11,12 +11,12 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
-from src.config.settings import get_settings
-from src.db.session import SessionLocal
-from src.services.crm_service import CRMService
-
 
 def run_once() -> int:
+    from src.config.settings import get_settings
+    from src.db.session import SessionLocal
+    from src.services.crm_service import CRMService
+
     settings = get_settings()
     with SessionLocal() as session:
         service = CRMService(

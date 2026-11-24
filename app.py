@@ -6,6 +6,7 @@ from src.config.settings import get_settings
 from src.db.base import Base
 from src.db.session import engine
 from src.logging_config import configure_logging
+from src.ui.analytics import render as render_analytics
 from src.ui.crm import render as render_crm
 from src.ui.dashboard import render
 from src.ui.emails import render as render_emails
@@ -43,6 +44,10 @@ def crm_page() -> None:
     render_crm(str(settings.default_tenant_id))
 
 
+def analytics_page() -> None:
+    render_analytics(str(settings.default_tenant_id))
+
+
 pages = {
     "Workspace": [
         st.Page(
@@ -77,6 +82,12 @@ pages = {
             title="CRM Sync",
             icon=":material/sync:",
             url_path="crm-sync",
+        ),
+        st.Page(
+            analytics_page,
+            title="Analytics",
+            icon=":material/analytics:",
+            url_path="analytics",
         ),
     ],
 }

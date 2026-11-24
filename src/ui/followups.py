@@ -25,14 +25,16 @@ def render(tenant_id: str) -> None:
         with tab_responses:
             st.subheader("Incoming response intake")
             st.caption(
-                "Manual demonstration intake. Initial release never sends automatic replies."
+                "Manual demonstration intake. Initial release never sends "
+                "automatic replies."
             )
             with st.form("response_intake"):
                 from_address = st.text_input("From", "customer@example.com")
                 subject = st.text_input("Subject", "Interested in a demo")
                 body = st.text_area(
                     "Message",
-                    "We are interested. Could you share more details and schedule a call?",
+                    "We are interested. Could you share more details and "
+                    "schedule a call?",
                 )
                 provider_message_id = st.text_input(
                     "Provider message ID",
