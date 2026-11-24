@@ -30,6 +30,7 @@ streamlit run app.py
 ```
 
 The default database is SQLite for local demonstration. Set `DATABASE_URL` to a PostgreSQL URL for production-style execution.
+The idempotent demo seed uses synthetic data to populate sample leads, qualifications, emails, responses, follow-ups, and mock CRM sync records.
 
 ## Database migrations
 
