@@ -77,3 +77,25 @@ class LeadFilters(DomainModel):
     direction: str = "desc"
     page: int = Field(default=1, ge=1)
     page_size: int = Field(default=20, ge=1, le=100)
+
+
+class QualificationEvidence(DomainModel):
+    business_requirements: list[str] = Field(default_factory=list)
+    customer_intent: str = Field(default="unknown")
+    product_interest: list[str] = Field(default_factory=list)
+    budget_assessment: str = Field(default="unknown")
+    timeline_assessment: str = Field(default="unknown")
+    authority_assessment: str = Field(default="unknown")
+    evidence: dict[str, list[str]] = Field(default_factory=dict)
+    missing_information: list[str] = Field(default_factory=list)
+    recommended_actions: list[str] = Field(default_factory=list)
+    summary: str = Field(default="")
+
+
+class QualificationResult(DomainModel):
+    lead_id: UUID
+    score: int = Field(ge=0, le=100)
+    status: str
+    evidence: QualificationEvidence
+    model_name: str
+    prompt_version: str

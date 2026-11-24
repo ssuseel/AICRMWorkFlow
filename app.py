@@ -19,19 +19,31 @@ st.set_page_config(
 settings = get_settings()
 Base.metadata.create_all(engine)
 
+
+def dashboard_page() -> None:
+    render(str(settings.default_tenant_id))
+
+
+def leads_page() -> None:
+    render_leads(str(settings.default_tenant_id))
+
+
 pages = {
     "Workspace": [
         st.Page(
-            lambda: render(str(settings.default_tenant_id)),
+            dashboard_page,
             title="Dashboard",
             icon=":material/dashboard:",
+            url_path="dashboard",
+            default=True,
         )
     ],
     "Sales": [
         st.Page(
-            lambda: render_leads(str(settings.default_tenant_id)),
+            leads_page,
             title="Leads",
             icon=":material/contact_mail:",
+            url_path="leads",
         )
     ],
 }

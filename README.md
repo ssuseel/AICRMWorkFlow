@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phase 2 lead management is implemented.
+Phase 3 AI qualification is implemented.
 
 Architecture documents:
 

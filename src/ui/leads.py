@@ -17,6 +17,7 @@ from src.services.lead_service import (
     LeadDeleteRestrictedError,
     LeadService,
 )
+from src.services.qualification_service import QualificationService
 from src.ui.styles import apply_styles
 
 
@@ -184,6 +185,32 @@ def render(tenant_id: str) -> None:
             if lead_options:
                 selected_label = st.selectbox("Edit or delete lead", list(lead_options))
                 selected = lead_options[selected_label]
+                if st.button("Run AI qualification", key=f"qualify_{selected.id}"):
+                    try:
+                        result = QualificationService(
+                            session,
+                            tenant_id,
+                        ).qualify(selected.id)
+                        st.success(
+                            f"Qualification complete: score {result.score}, status {result.status}"
+                        )
+                        st.write(result.evidence.summary)
+                        evidence = result.evidence
+                        c1, c2 = st.columns(2)
+                        with c1:
+                            st.write("**Supporting evidence**")
+                            st.json(evidence.evidence)
+                        with c2:
+                            st.write("**Missing information**")
+                            st.write(
+                                evidence.missing_information or ["None identified"]
+                            )
+                        st.write("**Recommended actions**")
+                        for action in evidence.recommended_actions:
+                            st.write(f"- {action}")
+                        st.rerun()
+                    except (LookupError, RuntimeError, TimeoutError) as exc:
+                        st.error(f"Unable to qualify lead: {exc}")
                 with st.form("edit_lead"):
                     edit_first = st.text_input("First name", selected.first_name)
                     edit_last = st.text_input("Last name", selected.last_name)

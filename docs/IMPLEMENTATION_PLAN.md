@@ -45,6 +45,8 @@ Exit criteria: lead CRUD/import/filter operations persist and pass focused tests
 
 ## Phase 3 - AI Qualification
 
+Status: complete.
+
 - Add AI provider abstraction and fallback
 - Store qualification and email prompts under `prompts/`
 - Add Pydantic structured-output schemas
