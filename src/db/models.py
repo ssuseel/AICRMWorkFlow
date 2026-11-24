@@ -196,6 +196,35 @@ class CRMSyncRecord(Base, TimestampMixin):
     idempotency_key: Mapped[str] = mapped_column(String(200), nullable=False)
 
 
+class CRMConnection(Base, TimestampMixin):
+    __tablename__ = "crm_connections"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_pk)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.id"), nullable=False)
+    provider: Mapped[str] = mapped_column(String(50), nullable=False)
+    status: Mapped[str] = mapped_column(String(30), default="active", nullable=False)
+    configuration: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    credentials_ref: Mapped[str | None] = mapped_column(String(200))
+
+
+class CRMFieldMapping(Base, TimestampMixin):
+    __tablename__ = "crm_mappings"
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "provider",
+            "local_field",
+            name="uq_crm_mapping_tenant_provider_field",
+        ),
+    )
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_pk)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.id"), nullable=False)
+    provider: Mapped[str] = mapped_column(String(50), nullable=False)
+    local_field: Mapped[str] = mapped_column(String(100), nullable=False)
+    remote_field: Mapped[str] = mapped_column(String(100), nullable=False)
+
+
 class AuditEvent(Base):
     __tablename__ = "audit_events"
 

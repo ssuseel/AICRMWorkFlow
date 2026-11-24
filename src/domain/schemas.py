@@ -148,3 +148,10 @@ class FollowUpCreate(DomainModel):
     priority: str = Field(default="medium", pattern="^(low|medium|high|urgent)$")
     due_at: datetime
     owner_id: UUID | None = None
+
+
+class CRMUpsertResult(DomainModel):
+    provider: str
+    external_id: str
+    entity_type: str
+    created: bool

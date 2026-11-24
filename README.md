@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phases 6 and 7 implement response intelligence and persistent follow-up management.
+Phase 8 adds mock CRM synchronization and a Salesforce REST adapter.
 
 Architecture documents:
 
@@ -44,3 +44,7 @@ ruff check .
 ```
 
 External AI, email and CRM integrations default to mock-safe configuration. Copy `.streamlit/secrets.toml.example` to `.streamlit/secrets.toml` for local Streamlit secrets.
+
+To configure Salesforce, set `CRM_PROVIDER=salesforce` and provide `SALESFORCE_CLIENT_ID`, `SALESFORCE_CLIENT_SECRET`, and `SALESFORCE_LOGIN_URL` through environment variables or Streamlit secrets. Configure a Salesforce Connected App for OAuth client-credentials flow. Credentials are not persisted in the database. Leave `CRM_PROVIDER=mock` for demonstration mode.
+
+Salesforce task/activity idempotency uses the `AICRM_Idempotency_Key__c` custom Task field. Create that field in Salesforce before enabling task/activity creation. The CRM synchronization UI supports tenant-specific local-to-remote lead field overrides.

@@ -22,8 +22,18 @@ def upgrade() -> None:
         sa.Column("slug", sa.String(length=100), nullable=False),
         sa.Column("status", sa.String(length=30), nullable=False),
         sa.Column("settings", sa.JSON(), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("slug"),
     )
@@ -35,8 +45,18 @@ def upgrade() -> None:
         sa.Column("display_name", sa.String(length=200), nullable=False),
         sa.Column("role", sa.String(length=50), nullable=False),
         sa.Column("status", sa.String(length=30), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("tenant_id", "email", name="uq_users_tenant_email"),
@@ -60,8 +80,18 @@ def upgrade() -> None:
         sa.Column("next_follow_up_at", sa.DateTime(timezone=True)),
         sa.Column("deleted_at", sa.DateTime(timezone=True)),
         sa.Column("created_by_id", sa.String(length=36)),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["owner_id"], ["users.id"]),
         sa.ForeignKeyConstraint(["created_by_id"], ["users.id"]),
@@ -73,7 +103,9 @@ def upgrade() -> None:
     op.create_index("ix_leads_tenant_source", "leads", ["tenant_id", "source"])
     op.create_index("ix_leads_tenant_industry", "leads", ["tenant_id", "industry"])
     op.create_index("ix_leads_tenant_created", "leads", ["tenant_id", "created_at"])
-    op.create_index("ix_leads_tenant_followup", "leads", ["tenant_id", "next_follow_up_at"])
+    op.create_index(
+        "ix_leads_tenant_followup", "leads", ["tenant_id", "next_follow_up_at"]
+    )
 
     op.create_table(
         "lead_qualifications",
@@ -93,8 +125,18 @@ def upgrade() -> None:
         sa.Column("evidence", sa.JSON(), nullable=False),
         sa.Column("missing_information", sa.JSON(), nullable=False),
         sa.Column("recommended_actions", sa.JSON(), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["lead_id"], ["leads.id"]),
         sa.PrimaryKeyConstraint("id"),
@@ -116,13 +158,25 @@ def upgrade() -> None:
         sa.Column("thread_id", sa.String(length=200)),
         sa.Column("idempotency_key", sa.String(length=200)),
         sa.Column("sent_at", sa.DateTime(timezone=True)),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["lead_id"], ["leads.id"]),
         sa.ForeignKeyConstraint(["approved_by_id"], ["users.id"]),
         sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("tenant_id", "idempotency_key", name="uq_emails_tenant_idempotency"),
+        sa.UniqueConstraint(
+            "tenant_id", "idempotency_key", name="uq_emails_tenant_idempotency"
+        ),
     )
     op.create_index("ix_emails_tenant_status", "emails", ["tenant_id", "status"])
     op.create_table(
@@ -142,13 +196,25 @@ def upgrade() -> None:
         sa.Column("human_review_required", sa.Boolean(), nullable=False),
         sa.Column("unsubscribed", sa.Boolean(), nullable=False),
         sa.Column("raw_content", sa.JSON(), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["lead_id"], ["leads.id"]),
         sa.ForeignKeyConstraint(["email_id"], ["emails.id"]),
         sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("tenant_id", "provider_message_id", name="uq_responses_tenant_message"),
+        sa.UniqueConstraint(
+            "tenant_id", "provider_message_id", name="uq_responses_tenant_message"
+        ),
     )
     op.create_table(
         "follow_ups",
@@ -165,15 +231,31 @@ def upgrade() -> None:
         sa.Column("completed_at", sa.DateTime(timezone=True)),
         sa.Column("cancelled_at", sa.DateTime(timezone=True)),
         sa.Column("cancellation_reason", sa.Text()),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["lead_id"], ["leads.id"]),
         sa.ForeignKeyConstraint(["owner_id"], ["users.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index("ix_followups_tenant_status_due", "follow_ups", ["tenant_id", "status", "due_at"])
-    op.create_index("ix_followups_tenant_owner", "follow_ups", ["tenant_id", "owner_id", "status"])
+    op.create_index(
+        "ix_followups_tenant_status_due",
+        "follow_ups",
+        ["tenant_id", "status", "due_at"],
+    )
+    op.create_index(
+        "ix_followups_tenant_owner", "follow_ups", ["tenant_id", "owner_id", "status"]
+    )
     op.create_table(
         "crm_sync_records",
         sa.Column("id", sa.String(length=36), nullable=False),
@@ -187,12 +269,24 @@ def upgrade() -> None:
         sa.Column("next_retry_at", sa.DateTime(timezone=True)),
         sa.Column("last_error", sa.Text()),
         sa.Column("idempotency_key", sa.String(length=200), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
-        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.ForeignKeyConstraint(["lead_id"], ["leads.id"]),
         sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("tenant_id", "idempotency_key", name="uq_crm_tenant_idempotency"),
+        sa.UniqueConstraint(
+            "tenant_id", "idempotency_key", name="uq_crm_tenant_idempotency"
+        ),
     )
     op.create_table(
         "audit_events",
@@ -205,7 +299,12 @@ def upgrade() -> None:
         sa.Column("before_state", sa.JSON()),
         sa.Column("after_state", sa.JSON()),
         sa.Column("correlation_id", sa.String(length=100)),
-        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("CURRENT_TIMESTAMP"), nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=False,
+        ),
         sa.ForeignKeyConstraint(["tenant_id"], ["tenants.id"]),
         sa.PrimaryKeyConstraint("id"),
     )

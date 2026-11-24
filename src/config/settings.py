@@ -22,6 +22,10 @@ class Settings(BaseModel):
     gmail_client_secret: str = Field(default="")
     gmail_refresh_token: str = Field(default="")
     gmail_sender: str = Field(default="")
+    salesforce_client_id: str = Field(default="")
+    salesforce_client_secret: str = Field(default="")
+    salesforce_login_url: str = Field(default="https://login.salesforce.com")
+    salesforce_api_version: str = Field(default="v60.0")
 
 
 @lru_cache
@@ -59,4 +63,10 @@ def get_settings() -> Settings:
         gmail_client_secret=value("GMAIL_CLIENT_SECRET", ""),
         gmail_refresh_token=value("GMAIL_REFRESH_TOKEN", ""),
         gmail_sender=value("GMAIL_SENDER", ""),
+        salesforce_client_id=value("SALESFORCE_CLIENT_ID", ""),
+        salesforce_client_secret=value("SALESFORCE_CLIENT_SECRET", ""),
+        salesforce_login_url=value(
+            "SALESFORCE_LOGIN_URL", "https://login.salesforce.com"
+        ),
+        salesforce_api_version=value("SALESFORCE_API_VERSION", "v60.0"),
     )

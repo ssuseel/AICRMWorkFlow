@@ -6,6 +6,7 @@ from src.config.settings import get_settings
 from src.db.base import Base
 from src.db.session import engine
 from src.logging_config import configure_logging
+from src.ui.crm import render as render_crm
 from src.ui.dashboard import render
 from src.ui.emails import render as render_emails
 from src.ui.followups import render as render_followups
@@ -38,6 +39,10 @@ def response_followup_page() -> None:
     render_followups(str(settings.default_tenant_id))
 
 
+def crm_page() -> None:
+    render_crm(str(settings.default_tenant_id))
+
+
 pages = {
     "Workspace": [
         st.Page(
@@ -66,6 +71,12 @@ pages = {
             title="Responses & Follow-ups",
             icon=":material/task:",
             url_path="responses-followups",
+        ),
+        st.Page(
+            crm_page,
+            title="CRM Sync",
+            icon=":material/sync:",
+            url_path="crm-sync",
         ),
     ],
 }

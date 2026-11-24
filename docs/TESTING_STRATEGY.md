@@ -6,6 +6,8 @@ Phase 6 coverage includes response classification, response deduplication, lead 
 
 Phase 7 coverage includes business-day calculations, scheduling, rescheduling, completion, cancellation, overdue transitions, and persistent worker execution.
 
+Phase 8 coverage includes tenant-scoped mock synchronization, idempotency, audit events, transient retry scheduling, permanent failures, field mapping, Salesforce OAuth configuration, lead create/update-by-email, and task idempotency. Provider tests use fake HTTP responses and do not call Salesforce.
+
 Phase 4 coverage includes draft creation and preview, draft edits, approval snapshots, approval enforcement, mock delivery, and idempotency-key persistence.
 
 Phase 2 coverage includes lead duplicate handling, lead updates and assignment, CSV imports, soft deletion safeguards, repository filtering, and tenant isolation.

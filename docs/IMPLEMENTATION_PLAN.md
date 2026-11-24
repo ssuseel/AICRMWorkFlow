@@ -109,6 +109,8 @@ Exit criteria: due work survives reruns; reply/unsubscribe cancels tasks; schedu
 
 ## Phase 8 - CRM Integration
 
+Status: complete for mock and Salesforce lead/contact/account/task/activity adapters.
+
 - Implement CRM provider abstraction
 - Add mock and provider-specific adapters
 - Add field mapping and idempotent sync records

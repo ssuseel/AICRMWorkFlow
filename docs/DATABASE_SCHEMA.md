@@ -192,13 +192,12 @@ Credentials are external secrets references, never stored plaintext.
 
 - `id`
 - `tenant_id`
-- `connection_id`
-- `entity_type`
+- `provider`
 - `local_field`
 - `remote_field`
 - timestamps
 
-Unique: (`connection_id`, `entity_type`, `local_field`)
+Unique: (`tenant_id`, `provider`, `local_field`)
 
 ### crm_sync_records
 
