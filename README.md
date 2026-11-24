@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phase 3 AI qualification is implemented.
+Phase 4 email drafting and mock sending are implemented.
 
 Architecture documents:
 

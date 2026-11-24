@@ -1,5 +1,7 @@
 # Testing Strategy
 
+Phase 4 coverage includes draft creation and preview, draft edits, approval snapshots, approval enforcement, mock delivery, and idempotency-key persistence.
+
 Phase 2 coverage includes lead duplicate handling, lead updates and assignment, CSV imports, soft deletion safeguards, repository filtering, and tenant isolation.
 
 ## Test levels

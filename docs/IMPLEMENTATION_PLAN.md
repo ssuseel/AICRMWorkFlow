@@ -59,6 +59,8 @@ Exit criteria: AI provider output is validated; unavailable provider falls back 
 
 ## Phase 4 - Email Generation
 
+Status: complete.
+
 - Add email template and draft models
 - Implement AI draft generation
 - Add draft edit/save/preview/approval UI

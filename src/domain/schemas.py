@@ -99,3 +99,21 @@ class QualificationResult(DomainModel):
     evidence: QualificationEvidence
     model_name: str
     prompt_version: str
+
+
+class EmailDraftCreate(DomainModel):
+    lead_id: UUID
+    subject: str = Field(min_length=1, max_length=500)
+    body: str = Field(min_length=1)
+
+
+class EmailDraftUpdate(DomainModel):
+    subject: str | None = Field(default=None, min_length=1, max_length=500)
+    body: str | None = Field(default=None, min_length=1)
+
+
+class DeliveryResult(DomainModel):
+    provider: str
+    provider_message_id: str
+    thread_id: str
+    status: str
