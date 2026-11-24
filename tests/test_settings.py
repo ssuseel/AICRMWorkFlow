@@ -1,0 +1,11 @@
+"""Configuration tests."""
+
+from src.config.settings import Settings
+
+
+def test_settings_defaults_to_demo_providers():
+    settings = Settings()
+    assert settings.database_url == "sqlite:///./aicrm.db"
+    assert settings.ai_provider == "mock"
+    assert settings.email_provider == "mock"
+    assert settings.crm_provider == "mock"
