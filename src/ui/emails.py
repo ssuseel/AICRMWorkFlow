@@ -2,9 +2,11 @@
 
 import streamlit as st
 
+from src.config.settings import get_settings
 from src.db.models import User
 from src.db.session import SessionLocal
 from src.domain.schemas import EmailDraftUpdate
+from src.integrations.email.base import EmailPermanentError, EmailTransientError
 from src.repositories.lead_repository import LeadRepository
 from src.services.email_service import (
     EmailApprovalRequiredError,
@@ -17,9 +19,13 @@ from src.ui.styles import apply_styles
 def render(tenant_id: str) -> None:
     apply_styles()
     st.title("Email Outreach")
-    st.caption(
-        "Draft and approve outreach. Sending is available only through the mock provider."
-    )
+    settings = get_settings()
+    if settings.email_provider.lower() == "gmail":
+        st.caption(
+            "Gmail provider configured. Real sending requires explicit approval."
+        )
+    else:
+        st.caption("Mock provider active. No external email is sent.")
 
     with SessionLocal() as session:
         lead_repository = LeadRepository(session, tenant_id)
@@ -117,12 +123,21 @@ def render(tenant_id: str) -> None:
 
         elif email.status == "APPROVED":
             st.success("Human approval captured. The mock provider is ready.")
-            if st.button("Send with mock provider", type="primary"):
+            provider_label = (
+                "Send with Gmail"
+                if get_settings().email_provider.lower() == "gmail"
+                else "Send with mock provider"
+            )
+            if st.button(provider_label, type="primary"):
                 try:
                     sent = email_service.send(email.id)
-                    st.success(f"Mock send complete: {sent.provider_message_id}")
+                    st.success(f"Send complete: {sent.provider_message_id}")
                     st.rerun()
                 except EmailApprovalRequiredError as exc:
                     st.error(str(exc))
+                except EmailTransientError as exc:
+                    st.error(f"Transient delivery failure: {exc}")
+                except EmailPermanentError as exc:
+                    st.error(f"Delivery was rejected: {exc}")
         else:
             st.info(f"Email status: {email.status}")

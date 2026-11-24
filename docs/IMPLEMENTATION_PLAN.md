@@ -72,6 +72,8 @@ Exit criteria: users can generate/edit/approve drafts; sending denied before app
 
 ## Phase 5 - Email Integration
 
+Status: complete for Gmail adapter and mock fallback.
+
 - Implement Gmail and Outlook adapters behind the email interface
 - Add OAuth configuration and secure secret handling
 - Implement send, retrieval and thread lookup

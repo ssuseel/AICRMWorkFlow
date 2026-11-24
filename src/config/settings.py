@@ -18,6 +18,10 @@ class Settings(BaseModel):
     ai_provider: str = Field(default="mock")
     email_provider: str = Field(default="mock")
     crm_provider: str = Field(default="mock")
+    gmail_client_id: str = Field(default="")
+    gmail_client_secret: str = Field(default="")
+    gmail_refresh_token: str = Field(default="")
+    gmail_sender: str = Field(default="")
 
 
 @lru_cache
@@ -51,4 +55,8 @@ def get_settings() -> Settings:
         ai_provider=value("AI_PROVIDER", "mock"),
         email_provider=value("EMAIL_PROVIDER", "mock"),
         crm_provider=value("CRM_PROVIDER", "mock"),
+        gmail_client_id=value("GMAIL_CLIENT_ID", ""),
+        gmail_client_secret=value("GMAIL_CLIENT_SECRET", ""),
+        gmail_refresh_token=value("GMAIL_REFRESH_TOKEN", ""),
+        gmail_sender=value("GMAIL_SENDER", ""),
     )

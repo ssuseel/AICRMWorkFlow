@@ -8,8 +8,12 @@ from sqlalchemy.orm import Session
 from src.db.models import Email, Lead
 from src.domain.enums import EmailStatus
 from src.domain.schemas import DeliveryResult, EmailDraftCreate, EmailDraftUpdate
-from src.integrations.email.base import EmailProvider
-from src.integrations.email.mock_provider import MockEmailProvider
+from src.integrations.email.base import (
+    EmailPermanentError,
+    EmailProvider,
+    EmailTransientError,
+)
+from src.integrations.email.factory import create_email_provider
 
 
 class EmailWorkflowError(ValueError):
@@ -29,7 +33,7 @@ class EmailService:
     ) -> None:
         self.session = session
         self.tenant_id = tenant_id
-        self.provider = provider or MockEmailProvider()
+        self.provider = provider or create_email_provider()
 
     def _get_email(self, email_id: str) -> Email:
         email = (
@@ -141,11 +145,22 @@ class EmailService:
         email.idempotency_key = idempotency_key or f"email-send-{uuid4()}"
         self.session.commit()
 
-        result: DeliveryResult = self.provider.send(
-            lead.email,
-            email.approved_subject or email.subject,
-            email.approved_body or email.body,
-        )
+        try:
+            result: DeliveryResult = self.provider.send(
+                lead.email,
+                email.approved_subject or email.subject,
+                email.approved_body or email.body,
+            )
+        except EmailTransientError:
+            email.status = EmailStatus.DELIVERY_FAILED.value
+            email.sent_at = None
+            self.session.commit()
+            raise
+        except EmailPermanentError:
+            email.status = EmailStatus.DELIVERY_FAILED.value
+            email.sent_at = None
+            self.session.commit()
+            raise
         email.provider = result.provider
         email.provider_message_id = result.provider_message_id
         email.thread_id = result.thread_id

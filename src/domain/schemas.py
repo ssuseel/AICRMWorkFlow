@@ -117,3 +117,12 @@ class DeliveryResult(DomainModel):
     provider_message_id: str
     thread_id: str
     status: str
+
+
+class IncomingEmail(DomainModel):
+    provider_message_id: str
+    thread_id: str
+    from_address: str
+    to_address: str
+    subject: str
+    body: str
