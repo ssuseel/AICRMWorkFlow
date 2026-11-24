@@ -36,9 +36,9 @@ SEED_DEMO_DATA = true
 
 Replace the example database URL with the provider's SSL-enabled connection
 string. Keep the password in the Cloud Secrets panel, not in source control.
-Set `SEED_DEMO_DATA = true` only for an isolated demo workspace; it creates
-fictional leads and is idempotent. Set it to `false` for a workspace that uses
-real customer data.
+Demo seeding is enabled if `SEED_DEMO_DATA` is omitted; it creates fictional
+leads and is idempotent. Set it to `true` only for an isolated demo workspace,
+and explicitly set it to `false` for a workspace that uses real customer data.
 
 ## Schema and Demo Data
 

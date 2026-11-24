@@ -18,7 +18,7 @@ class Settings(BaseModel):
     ai_provider: str = Field(default="mock")
     email_provider: str = Field(default="mock")
     crm_provider: str = Field(default="mock")
-    seed_demo_data: bool = Field(default=False)
+    seed_demo_data: bool = Field(default=True)
     gmail_client_id: str = Field(default="")
     gmail_client_secret: str = Field(default="")
     gmail_refresh_token: str = Field(default="")
@@ -60,7 +60,7 @@ def get_settings() -> Settings:
         ai_provider=value("AI_PROVIDER", "mock"),
         email_provider=value("EMAIL_PROVIDER", "mock"),
         crm_provider=value("CRM_PROVIDER", "mock"),
-        seed_demo_data=value("SEED_DEMO_DATA", "false"),
+        seed_demo_data=value("SEED_DEMO_DATA", "true"),
         gmail_client_id=value("GMAIL_CLIENT_ID", ""),
         gmail_client_secret=value("GMAIL_CLIENT_SECRET", ""),
         gmail_refresh_token=value("GMAIL_REFRESH_TOKEN", ""),
