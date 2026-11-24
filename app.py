@@ -21,7 +21,18 @@ st.set_page_config(
 )
 
 settings = get_settings()
-Base.metadata.create_all(engine)
+
+
+@st.cache_resource
+def initialize_database(database_url: str, seed_demo_data: bool) -> None:
+    Base.metadata.create_all(engine)
+    if seed_demo_data:
+        from sample_data.seed_demo import seed
+
+        seed(database_url)
+
+
+initialize_database(settings.database_url, settings.seed_demo_data)
 
 
 def dashboard_page() -> None:

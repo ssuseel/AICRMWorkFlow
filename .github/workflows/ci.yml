@@ -24,3 +24,15 @@ jobs:
         run: |
           alembic upgrade head
           alembic downgrade base
+      - name: Prepare deployment smoke database
+        env:
+          DATABASE_URL: sqlite:////tmp/aicrm-deployment-smoke.db
+        run: alembic upgrade head
+      - name: Seed deployment smoke data
+        env:
+          DATABASE_URL: sqlite:////tmp/aicrm-deployment-smoke.db
+        run: python -m sample_data.seed_demo
+      - name: Verify deployment database
+        env:
+          DATABASE_URL: sqlite:////tmp/aicrm-deployment-smoke.db
+        run: python -m scripts.deployment_smoke

@@ -141,6 +141,11 @@ Status: complete for current application modules and CI gates.
 
 ## Phase 11 - Deployment
 
+Status: complete for deployment configuration, demo bootstrap, CI migration
+and deployment smoke checks, and local Streamlit deployment verification.
+Streamlit Community Cloud publication requires an account and configured
+external PostgreSQL service and was not performed from this environment.
+
 - Add `app.py`, requirements, environment/secrets examples
 - Add Streamlit configuration
 - Add deployment documentation

@@ -4,7 +4,7 @@ AI-powered customer workflow platform for lead capture, qualification, approved 
 
 ## Project status
 
-Phases 9 and 10 add tenant-filtered analytics, metric regression tests, and CI quality gates.
+Phase 11 deployment preparation is complete and has passed local deployment smoke checks. Publishing to Community Cloud still requires an account and external PostgreSQL credentials.
 
 Architecture documents:
 
@@ -15,6 +15,7 @@ Architecture documents:
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Testing strategy](docs/TESTING_STRATEGY.md)
 - [Analytics definitions](docs/ANALYTICS.md)
+- [Streamlit deployment guide](docs/DEPLOYMENT.md)
 
 ## Local setup
 
@@ -45,6 +46,8 @@ ruff check .
 ```
 
 External AI, email and CRM integrations default to mock-safe configuration. Copy `.streamlit/secrets.toml.example` to `.streamlit/secrets.toml` for local Streamlit secrets.
+
+For Streamlit Community Cloud setup, PostgreSQL secrets, demo mode, and deployment checks, see [Deployment](docs/DEPLOYMENT.md).
 
 To configure Salesforce, set `CRM_PROVIDER=salesforce` and provide `SALESFORCE_CLIENT_ID`, `SALESFORCE_CLIENT_SECRET`, and `SALESFORCE_LOGIN_URL` through environment variables or Streamlit secrets. Configure a Salesforce Connected App for OAuth client-credentials flow. Credentials are not persisted in the database. Leave `CRM_PROVIDER=mock` for demonstration mode.
 
