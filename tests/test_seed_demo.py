@@ -20,14 +20,22 @@ def test_seed_demo_uses_valid_qualification_states_and_is_idempotent(tmp_path):
     first_result = seed(database_url)
     engine = create_engine(database_url)
     with sessionmaker(bind=engine)() as session:
-        lead = session.query(Lead).filter_by(
-            tenant_id=first_result["tenant_id"],
-            email="asha.patel@northwind.example",
-        ).one()
-        qualification = session.query(LeadQualification).filter_by(
-            tenant_id=first_result["tenant_id"],
-            lead_id=lead.id,
-        ).one()
+        lead = (
+            session.query(Lead)
+            .filter_by(
+                tenant_id=first_result["tenant_id"],
+                email="asha.patel@northwind.example",
+            )
+            .one()
+        )
+        qualification = (
+            session.query(LeadQualification)
+            .filter_by(
+                tenant_id=first_result["tenant_id"],
+                lead_id=lead.id,
+            )
+            .one()
+        )
         lead.qualification_status = "qualified"
         qualification.status = "completed"
         session.commit()
@@ -57,11 +65,15 @@ def test_seed_demo_uses_valid_qualification_states_and_is_idempotent(tmp_path):
             )
             for qualification in qualifications
         )
-        assert all(lead.qualification_status in {
-            "QUALIFIED",
-            "DISQUALIFIED",
-            "QUALIFICATION_PENDING",
-        } for lead in leads)
+        assert all(
+            lead.qualification_status
+            in {
+                "QUALIFIED",
+                "DISQUALIFIED",
+                "QUALIFICATION_PENDING",
+            }
+            for lead in leads
+        )
         assert all(
             lead.qualification_status
             == next(
@@ -81,7 +93,9 @@ def test_seed_demo_uses_valid_qualification_states_and_is_idempotent(tmp_path):
             CRMFieldMapping: 8,
         }
         for model, expected_count in expected_counts.items():
-            count = session.query(func.count(model.id)).filter_by(
-                tenant_id=first_result["tenant_id"]
-            ).scalar()
+            count = (
+                session.query(func.count(model.id))
+                .filter_by(tenant_id=first_result["tenant_id"])
+                .scalar()
+            )
             assert count == expected_count
